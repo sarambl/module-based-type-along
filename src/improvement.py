@@ -1,6 +1,23 @@
 import pandas as pd
 from matplotlib import pyplot as plt
 
+def plot_temp(temperatures):
+
+
+    # plot results
+    plt.plot(temperatures, 'r-')
+    plt.axhline(y=mean, color='b', linestyle='--')
+
+    # visuals for plot:
+    plt.xlabel('Time [h]')
+    plt.ylabel('Temperature [$^\circ$C]')
+
+    plt.savefig(str(num_measurements)+'.png')
+
+    #plt.clf()
+    plt.show()
+
+
 for num_measurements in [25, 100, 500]:
 
 
@@ -14,14 +31,7 @@ for num_measurements in [25, 100, 500]:
 
 
     # plot results
-    plt.plot(temperatures, 'r-')
-    plt.axhline(y=mean, color='b', linestyle='--')
-
-    # visuals for plot:
-    plt.xlabel('Time [h]')
-    plt.ylabel('Temperature [$^\circ$C]')
-
-    plt.savefig(str(num_measurements)+'.png')
+    plot_temp(temperatures)
 
     #plt.clf()
     plt.show()
