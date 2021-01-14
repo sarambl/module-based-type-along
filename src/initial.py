@@ -8,6 +8,7 @@ data = pd.read_csv('data/temperatures.csv', nrows=num_measurements)
 temperatures = data['Air temperature (degC)']
 
 # compute statistics
+
 mean = sum(temperatures)/num_measurements
 
 # plot results
