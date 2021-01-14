@@ -2,29 +2,39 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 
-def plot_data(data, xlabel, ylabel):
-    plt.plot(data, 'r-')
+def plot_data(data, mean, xlabel, ylabel, file_name):
+    plt.plot(data, "r-")
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plt.axhline(y=mean, color='b', linestyle='--')
-    plt.savefig(str(num_measurements)+'.png')
-    plt.show()
+    plt.axhline(y=mean, color="b", linestyle="--")
+    plt.savefig(file_name)
+    plt.clf()
 
 
-def compute_statistics(data):
-    mean = sum(data)/num_measurements
+def compute_mean(data):
+    mean = sum(data) / len(data)
     return mean
 
 
-def read_data(file_name, column):
-    data = pd.read_csv(file_name, nrows=num_measurements)
+def read_data(file_name, nrows, column):
+    data = pd.read_csv(file_name, nrows=nrows)
     return data[column]
 
 
 for num_measurements in [25, 100, 500]:
 
-    temperatures = read_data(file_name='data/temperatures.csv', column='Air temperature (degC)')
+    temperatures = read_data(
+        file_name="data/temperatures.csv",
+        nrows=num_measurements,
+        column="Air temperature (degC)",
+    )
 
-    mean = compute_statistics(temperatures)
+    mean = compute_mean(temperatures)
 
-    plot_data(data=temperatures, xlabel='measurements', ylabel='air temperature (deg C)')
+    plot_data(
+        data=temperatures,
+        mean=mean,
+        xlabel="measurements",
+        ylabel="air temperature (deg C)",
+        file_name=str(num_measurements)+'.png',
+    )
